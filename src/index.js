@@ -1,3 +1,4 @@
+import { Start, GamePlay } from "./core-game";
 import { Introduction } from "./introduction";
 
 const config = {
@@ -7,10 +8,11 @@ const config = {
   physics: {
       default: 'arcade',
       arcade: {
-          gravity: { y: 200 }
+        gravity: { y: 0 },
+          debug: true
       }
   },
-  scene: [Introduction]
+  scene: [Start, GamePlay]
 };
 
 const game = new Phaser.Game(config);

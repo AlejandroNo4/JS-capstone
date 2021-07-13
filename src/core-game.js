@@ -1,11 +1,11 @@
-export class Introduction extends Phaser.Scene {
+class Start extends Phaser.Scene {
   constructor() {
-    super("Introduction");
+    super("Start");
   }
+
   preload() {
     this.load.image("map-atlas", "./assets/map/mapTiles.png");
     this.load.tilemapTiledJSON("map", "./assets/map/map.json");
-
 
     this.load.spritesheet("player", "./assets/images/characters/player.png", {
       frameHeight: 138.8,
@@ -13,25 +13,29 @@ export class Introduction extends Phaser.Scene {
     });
   }
 
+  create() {
+    this.scene.start("GamePlay");
+  }
+}
 
-    onMeetEnemy(player, zone) { 
-      
-      zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-      zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-      
-      // shake the world
-      this.cameras.main.shake(300);
-      
+class GamePlay extends Phaser.Scene {
+  constructor() {
+    super("GamePlay");
+  }
 
-    }
+  preload() {}
 
+  onMeetEnemy(player, zone) {
+    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
+    // shake the world
+    this.cameras.main.shake(300);
+  }
 
   create() {
     const map = this.make.tilemap({ key: "map" });
-    const tilesetTerrain = map.addTilesetImage(
-      "map-tileset",
-      "map-atlas"
-    );
+    const tilesetTerrain = map.addTilesetImage("map-tileset", "map-atlas");
 
     const terrain = map.createLayer("Terrain", tilesetTerrain, 0, 0);
     const obstacles = map.createLayer("Obstacles", tilesetTerrain, 0, 0);
@@ -102,26 +106,30 @@ export class Introduction extends Phaser.Scene {
       frameRate: 10,
     });
 
-
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.player.setCollideWorldBounds(true);
 
     this.physics.add.collider(this.player, obstacles);
 
-        this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        for(let i = 0; i < 10; i++) {
-            let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-            let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-            // parameters are x, y, width, height
-            this.spawns.create(x, y, 20, 20); 
-                    
-        }        
-        this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    this.enemies = this.physics.add.group({
+      classType: Phaser.GameObjects.Zone,
+    });
+    for (let i = 0; i < 10; i++) {
+      let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+      let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+      this.enemies.create(x, y, 20, 20);
+    }
+    this.physics.add.overlap(
+      this.player,
+      this.enemies,
+      this.onMeetEnemy,
+      false,
+      this
+    );
   }
 
   update() {
-
     this.player.body.setVelocity(0);
     this.player.body.allowGravity = false;
 
@@ -184,3 +192,5 @@ export class Introduction extends Phaser.Scene {
     }
   }
 }
+
+export { Start, GamePlay };

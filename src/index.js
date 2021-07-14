@@ -1,6 +1,7 @@
-import { Start, GamePlay } from "./core-game";
-import { BattleScene } from "./battle";
-import { UIScene } from "./units";
+import { StartScene } from "./scenes/StartScene";
+import { GamePlayScene } from "./scenes/GamePlayScene";
+import { BattleScene } from "./scenes/BattleScene";
+import { UIScene } from "./scenes/UIScene";
 
 const config = {
   type: Phaser.AUTO,
@@ -11,10 +12,10 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: true,
+      debug: false,
     },
   },
-  scene: [Start, GamePlay, BattleScene, UIScene],
+  scene: [StartScene, GamePlayScene, BattleScene, UIScene],
 };
 
 const game = new Phaser.Game(config);

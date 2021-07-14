@@ -1,45 +1,13 @@
-class Start extends Phaser.Scene {
-  constructor() {
-    super("Start");
-  }
-
-  preload() {
-    this.load.image("map-atlas", "./assets/map/mapTiles.png");
-    this.load.tilemapTiledJSON("map", "./assets/map/map.json");
-
-    this.load.spritesheet("player", "./assets/images/characters/player.png", {
-      frameHeight: 138.8,
-      frameWidth: 109.5,
-    });
-
-    this.load.image(
-      "blue-plant",
-      "./assets/images/characters/enemy-plant-blue.png"
-    );
-    this.load.image(
-      "orange-plant",
-      "./assets/images/characters/enemy-plant-orange.png"
-    );
-  }
-
-  create() {
-    this.scene.start("GamePlay");
-  }
-}
-
-class GamePlay extends Phaser.Scene {
+class GamePlayScene extends Phaser.Scene {
   constructor() {
     super("GamePlay");
   }
 
   preload() {}
 
-  onMeetEnemy(player, zone) {
+  onMeetEnemy(zone) {
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-
-    // shake the world
-    this.cameras.main.shake(300);
 
     this.scene.switch("BattleScene");
   }
@@ -60,10 +28,37 @@ class GamePlay extends Phaser.Scene {
     obstacles.setCollisionByExclusion([-1]);
     const details = map.createLayer("Details", tilesetTerrain, 0, 0);
 
-    this.player = this.physics.add.sprite(200, 12750, "player", 64);
+    this.whiteCrystals = this.physics.add.group({
+      classType: Phaser.GameObjects.Image,
+    });
+    for (let i = 0; i < 30; i++) {
+      let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width * 1.3);
+      let y = Phaser.Math.RND.between(
+        0,
+        this.physics.world.bounds.height * 1.5
+      );
+      this.whiteCrystals.create(x, y, "white-crystal").setScale(0.07);
+    }
+
+    this.player = this.physics.add.sprite(200, 1100, "player", 64);
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
     this.player.setCollideWorldBounds(true);
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.cameras.main.startFollow(this.player);
+    this.player.setCollideWorldBounds(true);
+    this.physics.add.collider(this.player, obstacles);
+
+    const crystalPickup = this.sound.add("pickup");
+
+    this.physics.add.overlap(
+      this.player,
+      this.whiteCrystals,
+      function (player, whiteCrystals) {
+        crystalPickup.play();
+        whiteCrystals.destroy();
+      }
+    );
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -124,20 +119,11 @@ class GamePlay extends Phaser.Scene {
       frameRate: 10,
     });
 
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    this.cameras.main.startFollow(this.player);
-    this.player.setCollideWorldBounds(true);
-
-    this.physics.add.collider(this.player, obstacles);
-
     this.enemies = this.physics.add.group({
       classType: Phaser.GameObjects.Zone,
     });
-    for (let i = 0; i < 10; i++) {
-      let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-      let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-      this.enemies.create(x, y, 20, 20);
-    }
+    this.enemies.create(900, 100, 100, 50);
+
     this.physics.add.overlap(
       this.player,
       this.enemies,
@@ -213,4 +199,4 @@ class GamePlay extends Phaser.Scene {
   }
 }
 
-export { Start, GamePlay };
+export { GamePlayScene };

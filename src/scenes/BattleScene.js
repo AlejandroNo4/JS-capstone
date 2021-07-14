@@ -1,4 +1,4 @@
-import {PlayerCharacter, Enemy} from "./units";
+import {PlayerCharacter, Enemy} from "../classes/Unit";
 
 class BattleScene extends Phaser.Scene {
   constructor() {
@@ -170,10 +170,5 @@ class BattleScene extends Phaser.Scene {
     }
   }
 }
-
-
-// ************************************************* MESSAGES
-
-
 
 export { BattleScene};

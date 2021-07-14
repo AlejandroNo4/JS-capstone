@@ -60,7 +60,7 @@ class GamePlay extends Phaser.Scene {
     obstacles.setCollisionByExclusion([-1]);
     const details = map.createLayer("Details", tilesetTerrain, 0, 0);
 
-    this.player = this.physics.add.sprite(400, 12750, "player", 64);
+    this.player = this.physics.add.sprite(200, 12750, "player", 64);
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
     this.player.setCollideWorldBounds(true);

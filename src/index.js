@@ -1,6 +1,6 @@
 import { Start, GamePlay } from "./core-game";
-// import { Introduction } from "./introduction";
-import { BattleScene, UIScene } from "./battle";
+import { BattleScene } from "./battle";
+import { UIScene } from "./units";
 
 const config = {
   type: Phaser.AUTO,

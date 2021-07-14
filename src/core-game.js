@@ -11,6 +11,15 @@ class Start extends Phaser.Scene {
       frameHeight: 138.8,
       frameWidth: 109.5,
     });
+
+    this.load.image(
+      "blue-plant",
+      "./assets/images/characters/enemy-plant-blue.png"
+    );
+    this.load.image(
+      "orange-plant",
+      "./assets/images/characters/enemy-plant-orange.png"
+    );
   }
 
   create() {
@@ -31,6 +40,15 @@ class GamePlay extends Phaser.Scene {
 
     // shake the world
     this.cameras.main.shake(300);
+
+    this.scene.switch("BattleScene");
+  }
+
+  wake() {
+    this.cursors.left.reset();
+    this.cursors.right.reset();
+    this.cursors.up.reset();
+    this.cursors.down.reset();
   }
 
   create() {
@@ -127,6 +145,8 @@ class GamePlay extends Phaser.Scene {
       false,
       this
     );
+
+    this.sys.events.on("wake", this.wake, this);
   }
 
   update() {

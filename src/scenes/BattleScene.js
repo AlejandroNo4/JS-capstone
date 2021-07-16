@@ -131,7 +131,7 @@ class BattleScene extends Phaser.Scene {
     // sleep the UI
     this.scene.sleep("UIScene");
     // return to WorldScene and sleep current BattleScene
-    this.scene.switch("WorldScene");
+    this.scene.switch("GameOverScene");
   }
 
   nextTurn() {

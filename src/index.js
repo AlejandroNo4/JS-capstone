@@ -1,4 +1,8 @@
-import { StartScene } from "./scenes/StartScene";
+import GameOverScene from "./scenes/GameOverScene";
+import InstructionsScene from "./scenes/InstructionsScene";
+import IntroductionScene from "./scenes/IntroductionScene";
+import TitleScene from "./scenes/TitleScene";
+import { PreloadScene } from "./scenes/PreloadScene";
 import { PointsScene } from "./scenes/PointsScene";
 import { GamePlayScene } from "./scenes/GamePlayScene";
 import { BattleScene } from "./scenes/BattleScene";
@@ -16,7 +20,17 @@ const config = {
       debug: false,
     },
   },
-  scene: [StartScene, GamePlayScene, PointsScene, BattleScene, UIScene],
+  scene: [
+    PreloadScene,
+    TitleScene,
+    IntroductionScene,
+    InstructionsScene,
+    GamePlayScene,
+    PointsScene,
+    BattleScene,
+    UIScene,
+    GameOverScene
+  ],
 };
 
 const game = new Phaser.Game(config);

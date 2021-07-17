@@ -1,14 +1,34 @@
-import {PlayerCharacter, Enemy} from "../classes/Unit";
+import { PlayerCharacter, Enemy } from "../classes/Unit";
 
 class BattleScene extends Phaser.Scene {
   constructor() {
     super("BattleScene");
   }
-  preload() {}
+
+  init(data){
+    this.hp = data.score
+  }
+
+  create() {
+    // change the background to green
+    this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
+    this.startBattle();
+    // on wake event we call startBattle too
+    this.sys.events.on("wake", this.startBattle, this);
+    this.explosion = this.sound.add("explosion");
+    this.punch = this.sound.add("punch");
+    this.hurt = this.sound.add("bot-hurt");
+  }
 
   receivePlayerSelection(action, target) {
     if (action == "attack") {
       this.units[this.index].attack(this.enemies[target]);
+
+      if (this.index === 0) {
+        this.explosion.play();
+      } else if (this.index === 1) {
+        this.punch.play();
+      }
     }
     this.time.addEvent({
       delay: 3000,
@@ -32,7 +52,9 @@ class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    // change the background to green
+    this.sys.game.sound.stopAll();
+    this.battleTheme = this.sound.add("boss-battle");
+    this.battleTheme.play({ loop: true });
     this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
 
     // player character - warrior
@@ -42,24 +64,24 @@ class BattleScene extends Phaser.Scene {
       130,
       "player",
       1,
-      "Warrior",
-      100,
+      "BotHero's cannions",
+      this.hp,
       20
     );
     this.add.existing(warrior);
 
-    // player character - mage
-    const mage = new PlayerCharacter(
+    // player character - BotFist
+    const BotFist = new PlayerCharacter(
       this,
       600,
       300,
       "player",
       25,
-      "Mage",
-      80,
+      "Bot Fists",
+      this.hp * 0.8,
       8
     );
-    this.add.existing(mage);
+    this.add.existing(BotFist);
 
     const plantBlue = new Enemy(
       this,
@@ -67,7 +89,7 @@ class BattleScene extends Phaser.Scene {
       130,
       "blue-plant",
       null,
-      "Plant",
+      "Enemy",
       50,
       3
     );
@@ -79,14 +101,14 @@ class BattleScene extends Phaser.Scene {
       300,
       "orange-plant",
       null,
-      "Plant2",
+      "Enemy2",
       50,
       3
     );
     this.add.existing(plantOrange);
 
     // array with heroes
-    this.heroes = [warrior, mage];
+    this.heroes = [warrior, BotFist];
     // array with enemies
     this.enemies = [plantBlue, plantOrange];
     // array with both parties, who will attack
@@ -95,14 +117,6 @@ class BattleScene extends Phaser.Scene {
     this.index = -1; // currently active unit
 
     this.scene.run("UIScene");
-  }
-
-  create() {
-    // change the background to green
-    this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
-    this.startBattle();
-    // on wake event we call startBattle too
-    this.sys.events.on("wake", this.startBattle, this);
   }
 
   checkEndBattle() {
@@ -131,7 +145,7 @@ class BattleScene extends Phaser.Scene {
     // sleep the UI
     this.scene.sleep("UIScene");
     // return to WorldScene and sleep current BattleScene
-    this.scene.switch("GameOverScene");
+    this.scene.start("GameOverScene", { finalScore: this.hp});
   }
 
   nextTurn() {
@@ -161,6 +175,7 @@ class BattleScene extends Phaser.Scene {
       } while (!this.heroes[r].living);
       // call the enemy's attack function
       this.units[this.index].attack(this.heroes[r]);
+      this.hurt.play();
       // add timer for the next turn, so will have smooth gameplay
       this.time.addEvent({
         delay: 3000,
@@ -171,4 +186,4 @@ class BattleScene extends Phaser.Scene {
   }
 }
 
-export { BattleScene};
+export { BattleScene };

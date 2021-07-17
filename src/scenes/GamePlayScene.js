@@ -66,7 +66,7 @@ class GamePlayScene extends Phaser.Scene {
 
   createCrystals(){
     this.crystalsGroup = this.physics.add.group()
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.spawnCrystal()
     }
   }
@@ -94,14 +94,13 @@ class GamePlayScene extends Phaser.Scene {
     this.score += crystal.points
     this.events.emit("updateScore", this.score)
     crystal.destroy();
-    console.log(crystal.points);
   }
 
   onMeetEnemy(zone) {
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-
-    this.scene.switch("BattleScene");
+    this.scene.sleep("PointsScene");
+    this.scene.start("BattleScene", {score: this.score});
   }
 
   wake() {

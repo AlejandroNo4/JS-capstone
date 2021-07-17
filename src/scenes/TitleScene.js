@@ -11,9 +11,9 @@ class TitleScene extends Phaser.Scene{
     this.sound.pauseOnBlur = false
     this.clickSelectSound = this.sound.add("clickSelect");
     this.overSelectSound = this.sound.add("overSelect");
-    this.mainTheme = this.sound.add("title-music")
+    this.titleTheme = this.sound.add("title-music")
 
-    this.mainTheme.play({loop: true})
+    this.titleTheme.play({loop: true})
 
     playButton.setInteractive();
     playButton.on("pointerover",()=>{

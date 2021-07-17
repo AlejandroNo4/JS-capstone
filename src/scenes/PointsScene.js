@@ -10,6 +10,7 @@ class PointsScene extends Phaser.Scene {
   create() {
     this.setUpElements();
     this.setUpEvents();
+    this.lastPointsUpdate
   }
 
   setUpElements() {

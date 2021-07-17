@@ -6,6 +6,7 @@ class Unit extends Phaser.GameObjects.Sprite {
     this.damage = damage; // default damage
     this.living = true;
     this.menuItem = null;
+
   }
 
   setMenuItem(item) {
@@ -26,8 +27,6 @@ class Unit extends Phaser.GameObjects.Sprite {
           "hp "  + 
           this.hp
       );
-
-      this.hp += 10
     }
   }
   takeDamage(damage) {

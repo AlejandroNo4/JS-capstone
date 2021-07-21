@@ -91,7 +91,7 @@ class BattleScene extends Phaser.Scene {
       null,
       "Enemy",
       50,
-      3
+      15
     );
     this.add.existing(plantBlue);
 
@@ -103,7 +103,7 @@ class BattleScene extends Phaser.Scene {
       null,
       "Enemy2",
       50,
-      3
+      10
     );
     this.add.existing(plantOrange);
 

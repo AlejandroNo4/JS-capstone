@@ -33,7 +33,6 @@ class InstructionsScene extends Phaser.Scene{
       this.mainTheme.play({loop: true})
       this.scene.start("GamePlay")
     })
-
     
   }
 }

@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 class PointsScene extends Phaser.Scene {
   constructor() {
     super("PointsScene");
@@ -10,7 +11,7 @@ class PointsScene extends Phaser.Scene {
   create() {
     this.setUpElements();
     this.setUpEvents();
-    this.lastPointsUpdate
+    this.lastPointsUpdate;
   }
 
   setUpElements() {
@@ -22,10 +23,10 @@ class PointsScene extends Phaser.Scene {
   }
 
   setUpEvents() {
-    this.gameScene.events.on("updateScore", (points) =>{
-      this.pointsText.setText(`Points: ${points}`)
-    })
+    this.gameScene.events.on("updateScore", (points) => {
+      this.pointsText.setText(`Points: ${points}`);
+    });
   }
 }
 
-export { PointsScene };
+export default PointsScene;

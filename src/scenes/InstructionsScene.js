@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 class InstructionsScene extends Phaser.Scene{
   constructor(){
     super("InstructionsScene")

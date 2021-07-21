@@ -40,7 +40,14 @@
 //   console.log(topScores);
 // };
 
-
 // postData({ user: user, score: score }).then((data) => {
 //   asortResult();
 // });
+
+class Testii {
+  constructor(x) {
+    this.x = x;
+  }
+}
+
+export default Testii;

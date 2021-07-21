@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 class PreloadScene extends Phaser.Scene {
   constructor() {
     super("PreloadScene");
@@ -15,20 +16,30 @@ class PreloadScene extends Phaser.Scene {
       },
     });
 
-    this.load.on("progress", (percent)=>{
-      loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50);
-    })
+    this.load.on("progress", (percent) => {
+      loadingBar.fillRect(
+        0,
+        this.game.renderer.height / 2,
+        this.game.renderer.width * percent,
+        50
+      );
+    });
 
-    this.load.on("complete", ()=>{
-      
-      this.scene.start("TitleScene")
-    })
+    this.load.on("complete", () => {
+      this.scene.start("TitleScene");
+    });
   }
 
   loadImages() {
     this.load.image("white-crystal", "./assets/images/whiteCrystal.png");
-    this.load.image("orange-plant", "./assets/images/characters/enemy-plant-orange.png");
-    this.load.image("blue-plant","./assets/images/characters/enemy-plant-blue.png");
+    this.load.image(
+      "orange-plant",
+      "./assets/images/characters/enemy-plant-orange.png"
+    );
+    this.load.image(
+      "blue-plant",
+      "./assets/images/characters/enemy-plant-blue.png"
+    );
     this.load.image("titleImg", "./assets/images/bg-btn/title-background.png");
     this.load.image("introduction", "./assets/images/bg-btn/introduction.png");
     this.load.image("instructions", "./assets/images/bg-btn/instructions.png");
@@ -56,14 +67,11 @@ class PreloadScene extends Phaser.Scene {
     this.load.audio("clickSelect", "./assets/audio/click-select.wav");
     this.load.audio("main-music", "./assets/audio/main-music.mp3");
     this.load.audio("title-music", "./assets/audio/title-music.mp3");
-    this.load.audio("boss-battle", "./assets/audio/boss-battle.mp3")
-    this.load.audio("explosion", "./assets/audio/explosion.wav")
-    this.load.audio("punch", "./assets/audio/punch.wav")
+    this.load.audio("boss-battle", "./assets/audio/boss-battle.mp3");
+    this.load.audio("explosion", "./assets/audio/explosion.wav");
+    this.load.audio("punch", "./assets/audio/punch.wav");
     this.load.audio("bot-hurt", "./assets/audio/bot-hurt.mp3");
   }
-  
-
-
 }
 
-export { PreloadScene };
+export default PreloadScene;

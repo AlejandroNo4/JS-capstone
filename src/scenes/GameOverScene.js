@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { postData, getData} from "../api";
 class GameOverScene extends Phaser.Scene {
   constructor() {

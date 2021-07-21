@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { PlayerCharacter, Enemy } from "../classes/Unit";
 
 class BattleScene extends Phaser.Scene {
@@ -5,8 +6,8 @@ class BattleScene extends Phaser.Scene {
     super("BattleScene");
   }
 
-  init(data){
-    this.hp = data.score
+  init(data) {
+    this.hp = data.score;
   }
 
   create() {
@@ -145,7 +146,7 @@ class BattleScene extends Phaser.Scene {
     // sleep the UI
     this.scene.sleep("UIScene");
     // return to WorldScene and sleep current BattleScene
-    this.scene.start("GameOverScene", { finalScore: this.hp});
+    this.scene.start("GameOverScene", { finalScore: this.hp });
   }
 
   nextTurn() {
@@ -186,4 +187,4 @@ class BattleScene extends Phaser.Scene {
   }
 }
 
-export { BattleScene };
+export default BattleScene;

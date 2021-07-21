@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { HeroesMenu, ActionsMenu, EnemiesMenu } from "../classes/Menu";
 import Message from "../classes/Messages";
 
@@ -111,4 +112,4 @@ class UIScene extends Phaser.Scene {
   }
 }
 
-export { UIScene };
+export default UIScene;

@@ -65,7 +65,7 @@ class BattleScene extends Phaser.Scene {
       130,
       "player",
       1,
-      "BotHero's cannions",
+      "Robot cannon",
       this.hp,
       20
     );
@@ -78,7 +78,7 @@ class BattleScene extends Phaser.Scene {
       300,
       "player",
       25,
-      "Bot Fists",
+      "Robot fists",
       this.hp * 0.8,
       8
     );

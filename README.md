@@ -23,10 +23,19 @@ This game is a turn-based RPG in which your objective is to rescue your teammate
 
 Collecting supplies will not only give you more power, but it will also give you a better score. Get to your teammates to win the game. Hint: they are on the other side of the map.
 
+<br>
+
 ## Live Demo
 
 [Live Demo Link](https://alejandrono4.github.io/JS-capstone/)
 
+<br>
+
+## Game Design Document
+
+More information about the game in the [GDD](./GDD.md)
+
+<br>
 
 ## Getting Started
 
@@ -57,6 +66,18 @@ To get a local copy up and running, follow these simple example steps.
 
 <br/>
 
+
+## Run Tests
+
+- To run tests, you have to install Jest. Please run:
+
+        $ npm install --save-dev jest
+
+- Now, type:
+
+        $ npm run test
+
+<br/>
 
 ## Built With
 

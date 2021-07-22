@@ -1,27 +1,27 @@
-import UIScene from '../src/scenes/UIScene';
+import PointsScene from '../PointsScene';
 
-jest.mock('../src/scenes/UIScene');
+jest.mock('../PointsScene');
 
 const connectMock = jest.fn();
 
-UIScene.mockImplementation(() => ({
+PointsScene.mockImplementation(() => ({
   connect: connectMock,
 }));
 
 const mockedMethodImpl = jest.fn();
 
 beforeAll(() => {
-  UIScene.mockImplementation(() => ({
+  PointsScene.mockImplementation(() => ({
     mockedMethod: mockedMethodImpl,
   }));
 });
 
 beforeEach(() => {
-  UIScene.mockClear();
+  PointsScene.mockClear();
   mockedMethodImpl.mockClear();
 });
 
 test('The game instance can be created', () => {
-  const game = new UIScene();
+  const game = new PointsScene();
   expect(game).toBeTruthy();
 });

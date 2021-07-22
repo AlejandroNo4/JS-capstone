@@ -1,27 +1,27 @@
-import TitleScene from '../src/scenes/TitleScene';
+import BattleScene from '../BattleScene';
 
-jest.mock('../src/scenes/TitleScene');
+jest.mock('../BattleScene');
 
 const connectMock = jest.fn();
 
-TitleScene.mockImplementation(() => ({
+BattleScene.mockImplementation(() => ({
   connect: connectMock,
 }));
 
 const mockedMethodImpl = jest.fn();
 
 beforeAll(() => {
-  TitleScene.mockImplementation(() => ({
+  BattleScene.mockImplementation(() => ({
     mockedMethod: mockedMethodImpl,
   }));
 });
 
 beforeEach(() => {
-  TitleScene.mockClear();
+  BattleScene.mockClear();
   mockedMethodImpl.mockClear();
 });
 
 test('The game instance can be created', () => {
-  const game = new TitleScene();
+  const game = new BattleScene();
   expect(game).toBeTruthy();
 });

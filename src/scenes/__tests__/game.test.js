@@ -1,27 +1,27 @@
-import GameOverScene from '../src/scenes/GameOverScene';
+import GamePlayScene from '../GamePlayScene';
 
-jest.mock('../src/scenes/GameOverScene');
+jest.mock('../GamePlayScene');
 
 const connectMock = jest.fn();
 
-GameOverScene.mockImplementation(() => ({
+GamePlayScene.mockImplementation(() => ({
   connect: connectMock,
 }));
 
 const mockedMethodImpl = jest.fn();
 
 beforeAll(() => {
-  GameOverScene.mockImplementation(() => ({
+  GamePlayScene.mockImplementation(() => ({
     mockedMethod: mockedMethodImpl,
   }));
 });
 
 beforeEach(() => {
-  GameOverScene.mockClear();
+  GamePlayScene.mockClear();
   mockedMethodImpl.mockClear();
 });
 
 test('The game instance can be created', () => {
-  const game = new GameOverScene();
+  const game = new GamePlayScene();
   expect(game).toBeTruthy();
 });

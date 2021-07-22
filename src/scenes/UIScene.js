@@ -1,31 +1,31 @@
-import Phaser from "phaser";
-import { HeroesMenu, ActionsMenu, EnemiesMenu } from "../classes/Menu";
-import Message from "../classes/Messages";
+import Phaser from 'phaser';
+import HeroesMenu from '../classes/HeroesMenu';
+import ActionsMenu from '../classes/ActionsMenu';
+import EnemiesMenu from '../classes/EnemiesMenu';
+import Message from '../classes/Messages';
 
 class UIScene extends Phaser.Scene {
   constructor() {
-    super("UIScene");
+    super('UIScene');
   }
-  preload() {}
 
   remapHeroes() {
-    let heroes = this.battleScene.heroes;
+    const { heroes } = this.battleScene;
     this.heroesMenu.remap(heroes);
   }
 
   remapEnemies() {
-    const enemies = this.battleScene.enemies;
+    const { enemies } = this.battleScene;
     this.enemiesMenu.remap(enemies);
   }
 
   onKeyInput(event) {
     if (this.currentMenu && this.currentMenu.selected) {
-      if (event.code === "ArrowUp") {
+      if (event.code === 'ArrowUp') {
         this.currentMenu.moveSelectionUp();
-      } else if (event.code === "ArrowDown") {
+      } else if (event.code === 'ArrowDown') {
         this.currentMenu.moveSelectionDown();
-      } else if (event.code === "ArrowRight" || event.code === "Shift") {
-      } else if (event.code === "Space" || event.code === "ArrowLeft") {
+      } else if (event.code === 'Space' || event.code === 'ArrowLeft') {
         this.currentMenu.confirm();
       }
     }
@@ -47,15 +47,12 @@ class UIScene extends Phaser.Scene {
     this.actionsMenu.deselect();
     this.enemiesMenu.deselect();
     this.currentMenu = null;
-    this.battleScene.receivePlayerSelection("attack", index);
+    this.battleScene.receivePlayerSelection('attack', index);
   }
 
   createMenu() {
-    // map hero menu items to heroes
     this.remapHeroes();
-    // map enemies menu items to enemies
     this.remapEnemies();
-    // first move
     this.battleScene.nextTurn();
   }
 
@@ -70,41 +67,30 @@ class UIScene extends Phaser.Scene {
     this.graphics.strokeRect(448, 400, 350, 200);
     this.graphics.fillRect(448, 400, 350, 200);
 
-    // basic container to hold all menus
     this.menus = this.add.container();
 
     this.heroesMenu = new HeroesMenu(460, 425, this);
     this.actionsMenu = new ActionsMenu(250, 425, this);
     this.enemiesMenu = new EnemiesMenu(8, 425, this);
 
-    // the currently selected menu
-
     this.currentMenu = this.actionsMenu;
 
-    // add menus to the container
     this.menus.add(this.heroesMenu);
     this.menus.add(this.actionsMenu);
     this.menus.add(this.enemiesMenu);
 
-    this.battleScene = this.scene.get("BattleScene");
+    this.battleScene = this.scene.get('BattleScene');
 
-    // listen for keyboard events
-    this.input.keyboard.on("keydown", this.onKeyInput, this);
+    this.input.keyboard.on('keydown', this.onKeyInput, this);
 
-    // when its player cunit turn to move
-    this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
+    this.battleScene.events.on('PlayerSelect', this.onPlayerSelect, this);
 
-    // when the action on the menu is selected
-    // for now we have only one action so we dont send and action id
-    this.events.on("SelectAction", this.onSelectAction, this);
+    this.events.on('SelectAction', this.onSelectAction, this);
 
-    // an enemy is selected
-    this.events.on("Enemy", this.onEnemy, this);
+    this.events.on('Enemy', this.onEnemy, this);
 
-    // when the scene receives wake event
-    this.sys.events.on("wake", this.createMenu, this);
+    this.sys.events.on('wake', this.createMenu, this);
 
-    // the message describing the current action
     this.message = new Message(this, this.battleScene.events);
     this.add.existing(this.message);
 

@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 class Crystals extends Phaser.Physics.Arcade.Image {
   constructor(scene, x, y, key, frame) {
     super(scene, x, y, key, frame);
@@ -9,4 +11,4 @@ class Crystals extends Phaser.Physics.Arcade.Image {
   }
 }
 
-export { Crystals };
+export default Crystals;

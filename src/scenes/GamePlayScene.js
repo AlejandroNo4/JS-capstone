@@ -1,14 +1,14 @@
-import Phaser from "phaser";
-import Player from "../classes/Player";
-import { Crystals } from "../classes/Crystals";
+import Phaser from 'phaser';
+import Player from '../classes/Player';
+import Crystals from '../classes/Crystals';
 
 class GamePlayScene extends Phaser.Scene {
   constructor() {
-    super("GamePlay");
+    super('GamePlay');
   }
 
   init() {
-    this.scene.launch("PointsScene");
+    this.scene.launch('PointsScene');
     this.score = 0;
   }
 
@@ -26,7 +26,7 @@ class GamePlayScene extends Phaser.Scene {
       this.crystalsGroup,
       this.collect,
       null,
-      this
+      this,
     );
 
     this.physics.add.overlap(
@@ -34,10 +34,10 @@ class GamePlayScene extends Phaser.Scene {
       this.enemies,
       this.onMeetEnemy,
       false,
-      this
+      this,
     );
 
-    this.sys.events.on("wake", this.wake, this);
+    this.sys.events.on('wake', this.wake, this);
   }
 
   update() {
@@ -45,16 +45,16 @@ class GamePlayScene extends Phaser.Scene {
   }
 
   createPlayer() {
-    this.player = new Player(this, 200, 1100, "player", 1);
+    this.player = new Player(this, 200, 1100, 'player', 1);
   }
 
   createMap() {
-    const map = this.make.tilemap({ key: "map" });
-    const tilesetTerrain = map.addTilesetImage("map-tileset", "map-atlas");
-    const terrain = map.createLayer("Terrain", tilesetTerrain, 0, 0);
-    const obstacles = map.createLayer("Obstacles", tilesetTerrain, 0, 0);
+    const map = this.make.tilemap({ key: 'map' });
+    const tilesetTerrain = map.addTilesetImage('map-tileset', 'map-atlas');
+    map.createLayer('Terrain', tilesetTerrain, 0, 0);
+    const obstacles = map.createLayer('Obstacles', tilesetTerrain, 0, 0);
     obstacles.setCollisionByExclusion([-1]);
-    const details = map.createLayer("Details", tilesetTerrain, 0, 0);
+    map.createLayer('Details', tilesetTerrain, 0, 0);
 
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
@@ -66,15 +66,15 @@ class GamePlayScene extends Phaser.Scene {
 
   createCrystals() {
     this.crystalsGroup = this.physics.add.group();
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i += 1) {
       this.spawnCrystal();
     }
   }
 
   spawnCrystal() {
-    let x = Phaser.Math.RND.between(0, 900);
-    let y = Phaser.Math.RND.between(0, 800);
-    let crystal = new Crystals(this, x, y, "white-crystal").setScale(0.07);
+    const x = Phaser.Math.RND.between(0, 900);
+    const y = Phaser.Math.RND.between(0, 800);
+    const crystal = new Crystals(this, x, y, 'white-crystal').setScale(0.07);
     this.crystalsGroup.add(crystal);
   }
 
@@ -86,21 +86,21 @@ class GamePlayScene extends Phaser.Scene {
   }
 
   createAudio() {
-    this.crystalPickupSound = this.sound.add("pickup");
+    this.crystalPickupSound = this.sound.add('pickup');
   }
 
   collect(player, crystal) {
     this.crystalPickupSound.play();
     this.score += crystal.points;
-    this.events.emit("updateScore", this.score);
+    this.events.emit('updateScore', this.score);
     crystal.destroy();
   }
 
   onMeetEnemy(zone) {
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-    this.scene.sleep("PointsScene");
-    this.scene.start("BattleScene", { score: this.score });
+    this.scene.sleep('PointsScene');
+    this.scene.start('BattleScene', { score: this.score });
   }
 
   wake() {

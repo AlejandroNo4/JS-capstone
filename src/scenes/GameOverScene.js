@@ -1,8 +1,9 @@
-import Phaser from "phaser";
-import { postData, getData } from "../api";
+import Phaser from 'phaser';
+import { postData, getData } from '../api';
+
 class GameOverScene extends Phaser.Scene {
   constructor() {
-    super("GameOverScene");
+    super('GameOverScene');
   }
 
   init(data) {
@@ -10,42 +11,43 @@ class GameOverScene extends Phaser.Scene {
   }
 
   create() {
-    this.userName = this.registry.get("name");
+    this.userName = this.registry.get('name');
 
     this.body = document.body;
     this.sys.game.sound.stopAll();
-    this.add.image(0, 0, "game-over").setOrigin(0);
+    this.add.image(0, 0, 'game-over').setOrigin(0);
     this.pointsText = this.add.text(
       this.game.renderer.width * 0.3,
       this.game.renderer.height * 0.25,
       `Your final score: ${this.finalScore}`,
       {
-        fontSize: "35px",
-        fontFamily: "arial",
-        color: "#fff",
-      }
+        fontSize: '35px',
+        fontFamily: 'arial',
+        color: '#fff',
+      },
     );
-    let backButton = this.add.image(
+    const backButton = this.add.image(
       this.game.renderer.width * 0.8,
       this.game.renderer.height * 0.9,
-      "back"
+      'back',
     );
 
-    this.clickSelectSound = this.sound.add("clickSelect");
-    this.overSelectSound = this.sound.add("overSelect");
+    this.clickSelectSound = this.sound.add('clickSelect');
+    this.overSelectSound = this.sound.add('overSelect');
 
     backButton.setInteractive();
-    backButton.on("pointerover", () => {
+    backButton.on('pointerover', () => {
       this.overSelectSound.play();
     });
 
-    backButton.on("pointerup", () => {
+    backButton.on('pointerup', () => {
       this.clickSelectSound.play();
-      this.body.removeChild(this.body.lastChild);
-      this.scene.start("TitleScene");
+      this.body.removeChild(
+        this.body.childNodes[this.body.childNodes.length - 2],
+      );
+      this.scene.start('TitleScene');
     });
 
-    console.log(this.userName);
     this.topScores();
   }
 
@@ -56,26 +58,25 @@ class GameOverScene extends Phaser.Scene {
       const topScores = Object.values(result.result)
         .sort(sortByMinNum)
         .slice(0, 5);
-      console.log(topScores);
 
-      const listContainer = document.createElement("ul");
-      const labelItem = document.createElement("li");
-      labelItem.classList.add("label");
-      labelItem.innerText = "Top scores:";
+      const listContainer = document.createElement('ul');
+      const labelItem = document.createElement('li');
+      labelItem.classList.add('label');
+      labelItem.innerText = 'Top scores:';
       listContainer.appendChild(labelItem);
-      listContainer.classList.add("list");
-      for (let i = 0; i < 5; i++) {
-        const listItem = document.createElement("li");
-        let itemName = document.createElement("p");
-        let itemScore = document.createElement("p");
+      listContainer.classList.add('list');
+      for (let i = 0; i < 5; i += 1) {
+        const listItem = document.createElement('li');
+        const itemName = document.createElement('p');
+        const itemScore = document.createElement('p');
         itemName.innerText = topScores[i].user;
         listItem.appendChild(itemName);
         itemScore.innerText = topScores[i].score;
         listItem.appendChild(itemScore);
-        listItem.classList.add("item-list");
+        listItem.classList.add('item-list');
         listContainer.appendChild(listItem);
       }
-      this.body.appendChild(listContainer);
+      this.body.insertBefore(listContainer, this.body.lastChild);
     });
   }
 }

@@ -1,6 +1,6 @@
-import UIScene from "../src/scenes/UIScene"
+import UIScene from '../src/scenes/UIScene';
 
-jest.mock("../src/scenes/UIScene");
+jest.mock('../src/scenes/UIScene');
 
 const connectMock = jest.fn();
 

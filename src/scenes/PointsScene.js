@@ -1,29 +1,29 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
+
 class PointsScene extends Phaser.Scene {
   constructor() {
-    super("PointsScene");
+    super('PointsScene');
   }
 
   init() {
-    this.gameScene = this.scene.get("GamePlay");
+    this.gameScene = this.scene.get('GamePlay');
   }
 
   create() {
     this.setUpElements();
     this.setUpEvents();
-    this.lastPointsUpdate;
   }
 
   setUpElements() {
-    this.pointsText = this.add.text(35, 8, "Points: 0", {
-      fontSize: "16px",
-      fontFamily: "arial",
-      color: "#000",
+    this.pointsText = this.add.text(35, 8, 'Points: 0', {
+      fontSize: '16px',
+      fontFamily: 'arial',
+      color: '#000',
     });
   }
 
   setUpEvents() {
-    this.gameScene.events.on("updateScore", (points) => {
+    this.gameScene.events.on('updateScore', (points) => {
       this.pointsText.setText(`Points: ${points}`);
     });
   }

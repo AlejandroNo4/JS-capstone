@@ -1,6 +1,6 @@
-import GamePlayScene from "../src/scenes/GamePlayScene"
+import GamePlayScene from '../src/scenes/GamePlayScene';
 
-jest.mock("../src/scenes/GamePlayScene");
+jest.mock('../src/scenes/GamePlayScene');
 
 const connectMock = jest.fn();
 

@@ -1,12 +1,13 @@
-import GameOverScene from "./scenes/GameOverScene";
-import InstructionsScene from "./scenes/InstructionsScene";
-import IntroductionScene from "./scenes/IntroductionScene";
-import TitleScene from "./scenes/TitleScene";
-import PreloadScene  from "./scenes/PreloadScene";
-import PointsScene  from "./scenes/PointsScene";
-import GamePlayScene  from "./scenes/GamePlayScene";
-import BattleScene  from "./scenes/BattleScene";
-import UIScene  from "./scenes/UIScene";
+import Phaser from 'phaser';
+import GameOverScene from './scenes/GameOverScene';
+import InstructionsScene from './scenes/InstructionsScene';
+import IntroductionScene from './scenes/IntroductionScene';
+import TitleScene from './scenes/TitleScene';
+import PreloadScene from './scenes/PreloadScene';
+import PointsScene from './scenes/PointsScene';
+import GamePlayScene from './scenes/GamePlayScene';
+import BattleScene from './scenes/BattleScene';
+import UIScene from './scenes/UIScene';
 
 const config = {
   type: Phaser.AUTO,
@@ -14,7 +15,7 @@ const config = {
   height: 600,
   pixelArt: true,
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
       gravity: { y: 0 },
       debug: false,
@@ -34,3 +35,5 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
+export default game;

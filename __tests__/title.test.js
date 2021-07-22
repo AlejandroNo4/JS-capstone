@@ -1,6 +1,6 @@
-import TitleScene from "../src/scenes/TitleScene"
+import TitleScene from '../src/scenes/TitleScene';
 
-jest.mock("../src/scenes/TitleScene");
+jest.mock('../src/scenes/TitleScene');
 
 const connectMock = jest.fn();
 

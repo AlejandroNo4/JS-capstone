@@ -1,6 +1,6 @@
-import InstructionsScene from "../src/scenes/InstructionsScene"
+import InstructionsScene from '../src/scenes/InstructionsScene';
 
-jest.mock("../src/scenes/InstructionsScene");
+jest.mock('../src/scenes/InstructionsScene');
 
 const connectMock = jest.fn();
 

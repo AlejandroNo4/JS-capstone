@@ -1,7 +1,6 @@
-import PointsScene from "../src/scenes/PointsScene"
+import PointsScene from '../src/scenes/PointsScene';
 
-
-jest.mock("../src/scenes/PointsScene");
+jest.mock('../src/scenes/PointsScene');
 
 const connectMock = jest.fn();
 

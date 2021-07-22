@@ -1,6 +1,6 @@
-import BattleScene from "../src/scenes/BattleScene"
+import BattleScene from '../src/scenes/BattleScene';
 
-jest.mock("../src/scenes/BattleScene");
+jest.mock('../src/scenes/BattleScene');
 
 const connectMock = jest.fn();
 

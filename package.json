@@ -7,7 +7,8 @@
     "test": "jest",
     "build": "webpack --mode=production --node-env=production --watch",
     "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production"
+    "build:prod": "webpack --mode=production --node-env=production",
+    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --port=$PORT --disable-host-check"
   },
   "repository": {
     "type": "git",
@@ -50,5 +51,6 @@
     "setupFiles": [
       "jest-canvas-mock"
     ]
-  }
+  },
+  "heroku-run-build-script": true
 }

@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Iced Wars
+# Iced War
 
 > RPG turn based game
 

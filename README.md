@@ -25,7 +25,7 @@ Collecting supplies will not only give you more power, but it will also give you
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://alejandrono4.github.io/JS-capstone/)
 
 
 ## Getting Started

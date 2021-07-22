@@ -63,7 +63,7 @@ class PreloadScene extends Phaser.Scene {
   }
 
   loadAudio() {
-    this.load.audio('pickup', './assets/audio/pickup.wav');
+    this.load.audio('pickup', './assets/audio/Pickup.wav');
     this.load.audio('overSelect', './assets/audio/over-select.wav');
     this.load.audio('clickSelect', './assets/audio/click-select.wav');
     this.load.audio('main-music', './assets/audio/main-music.mp3');

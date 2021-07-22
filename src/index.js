@@ -2,11 +2,11 @@ import GameOverScene from "./scenes/GameOverScene";
 import InstructionsScene from "./scenes/InstructionsScene";
 import IntroductionScene from "./scenes/IntroductionScene";
 import TitleScene from "./scenes/TitleScene";
-import { PreloadScene } from "./scenes/PreloadScene";
-import { PointsScene } from "./scenes/PointsScene";
-import { GamePlayScene } from "./scenes/GamePlayScene";
-import { BattleScene } from "./scenes/BattleScene";
-import { UIScene } from "./scenes/UIScene";
+import PreloadScene  from "./scenes/PreloadScene";
+import PointsScene  from "./scenes/PointsScene";
+import GamePlayScene  from "./scenes/GamePlayScene";
+import BattleScene  from "./scenes/BattleScene";
+import UIScene  from "./scenes/UIScene";
 
 const config = {
   type: Phaser.AUTO,
@@ -29,7 +29,7 @@ const config = {
     PointsScene,
     BattleScene,
     UIScene,
-    GameOverScene
+    GameOverScene,
   ],
 };
 

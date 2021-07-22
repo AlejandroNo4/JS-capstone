@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { postData, getData} from "../api";
+import { postData, getData } from "../api";
 class GameOverScene extends Phaser.Scene {
   constructor() {
     super("GameOverScene");
@@ -10,9 +10,9 @@ class GameOverScene extends Phaser.Scene {
   }
 
   create() {
-    this.userName = this.registry.get("name")
+    this.userName = this.registry.get("name");
 
-    this.body = document.body
+    this.body = document.body;
     this.sys.game.sound.stopAll();
     this.add.image(0, 0, "game-over").setOrigin(0);
     this.pointsText = this.add.text(
@@ -41,40 +41,41 @@ class GameOverScene extends Phaser.Scene {
 
     backButton.on("pointerup", () => {
       this.clickSelectSound.play();
-      this.body.removeChild(this.body.lastChild)
+      this.body.removeChild(this.body.lastChild);
       this.scene.start("TitleScene");
     });
 
-    console.log(this.userName)
-    this.topScores()
-
+    console.log(this.userName);
+    this.topScores();
   }
 
-  topScores(){
-    postData({ user: this.userName, score: this.finalScore }).then( async () => {
+  topScores() {
+    postData({ user: this.userName, score: this.finalScore }).then(async () => {
       const result = await getData();
       const sortByMinNum = (a, b) => b.score - a.score;
-      const topScores = Object.values(result.result).sort(sortByMinNum).slice(0, 5);
-      console.log(topScores)
+      const topScores = Object.values(result.result)
+        .sort(sortByMinNum)
+        .slice(0, 5);
+      console.log(topScores);
 
-      const listContainer = document.createElement("ul")
-      const labelItem = document.createElement("li")
-      labelItem.classList.add("label")
-      labelItem.innerText = "Top scores:"
-      listContainer.appendChild(labelItem)
-      listContainer.classList.add("list")
-        for(let i = 0; i < 5; i ++){
-          const listItem = document.createElement("li")
-          let itemName = document.createElement("p")
-          let itemScore = document.createElement("p")
-          itemName.innerText = topScores[i].user
-          listItem.appendChild(itemName)
-          itemScore.innerText = topScores[i].score
-          listItem.appendChild(itemScore)
-          listItem.classList.add("item-list")
-          listContainer.appendChild(listItem)
-        }
-      this.body.appendChild(listContainer)
+      const listContainer = document.createElement("ul");
+      const labelItem = document.createElement("li");
+      labelItem.classList.add("label");
+      labelItem.innerText = "Top scores:";
+      listContainer.appendChild(labelItem);
+      listContainer.classList.add("list");
+      for (let i = 0; i < 5; i++) {
+        const listItem = document.createElement("li");
+        let itemName = document.createElement("p");
+        let itemScore = document.createElement("p");
+        itemName.innerText = topScores[i].user;
+        listItem.appendChild(itemName);
+        itemScore.innerText = topScores[i].score;
+        listItem.appendChild(itemScore);
+        listItem.classList.add("item-list");
+        listContainer.appendChild(listItem);
+      }
+      this.body.appendChild(listContainer);
     });
   }
 }

@@ -1,7 +1,5 @@
 import 'regenerator-runtime/runtime';
 const gameId = "bnRUsAVEu4IEeE9sFsQx";
-let user = "Henry";
-let score = 99;
 
 async function postData(data = {}) {
   const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;

@@ -29,7 +29,7 @@
     "jest": "^27.0.6",
     "jest-canvas-mock": "^2.3.1",
     "style-loader": "^3.0.0",
-    "webpack": "^5.44.0",
+    "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
@@ -39,6 +39,8 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "setupFiles": ["jest-canvas-mock"]
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }

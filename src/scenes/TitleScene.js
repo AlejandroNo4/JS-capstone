@@ -54,11 +54,10 @@ class TitleScene extends Phaser.Scene {
     nameForm.addEventListener("submit", (event) => {
       event.preventDefault();
       this.playButton.visible = true;
-      this.registry.set("name", nameInput.value)
+      this.registry.set("name", nameInput.value);
       body.removeChild(body.lastChild);
     });
   }
-
 }
 
 export default TitleScene;

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { Player } from "../classes/Player";
+import Player from "../classes/Player";
 import { Crystals } from "../classes/Crystals";
 
 class GamePlayScene extends Phaser.Scene {

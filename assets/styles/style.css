@@ -3,11 +3,11 @@ canvas {
   margin: auto;
 }
 
-body{
+body {
   position: relative;
 }
 
-.inputBox{
+.inputBox {
   width: 400px;
 }
 
@@ -19,7 +19,7 @@ body{
   display: none;
 }
 
-.label{
+.label {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
@@ -27,27 +27,26 @@ body{
 
 .formInputName {
   position: absolute;
-  margin: 0, auto;
   top: 400px;
-  left: calc(100vw / 2 - 200px );
+  left: calc(100vw / 2 - 200px);
 }
 
-.list{
+.list {
   position: absolute;
   top: 200px;
-  left: calc(100vw / 2 - 200px );
+  left: calc(100vw / 2 - 200px);
   padding: 0;
   list-style: none;
   width: 400px;
   text-align: center;
 }
 
-.item-list{
+.item-list {
   display: flex;
   justify-content: space-between;
   font-size: 1.2em;
   line-height: 0.3;
-  border-bottom: 1px solid white ;
+  border-bottom: 1px solid white;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }

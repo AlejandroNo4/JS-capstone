@@ -4,24 +4,36 @@ jest.mock('../InstructionsScene');
 
 const connectMock = jest.fn();
 
-InstructionsScene.mockImplementation(() => ({
-  connect: connectMock,
+InstructionsScene.mockImplementationOnce(() => ({
+  constructor: connectMock,
 }));
-
-const mockedMethodImpl = jest.fn();
-
-beforeAll(() => {
-  InstructionsScene.mockImplementation(() => ({
-    mockedMethod: mockedMethodImpl,
-  }));
-});
 
 beforeEach(() => {
   InstructionsScene.mockClear();
-  mockedMethodImpl.mockClear();
 });
 
 test('The game instance can be created', () => {
   const game = new InstructionsScene();
   expect(game).toBeTruthy();
+});
+
+test('The InstructionsScene is an object', () => {
+  const game = new InstructionsScene();
+  expect(typeof game).toEqual('object');
+});
+
+test('Bad way to call a new InstructionsScene', () => {
+  const game = InstructionsScene();
+  expect(game).not.toEqual('object');
+});
+
+test("The game constructor doesn't have any argument", () => {
+  const game = new InstructionsScene();
+  game.constructor();
+  expect(connectMock.mock.calls).not.toBe(game.constructor('Scene'));
+});
+
+test('The game declared function includes all declared functions', () => {
+  const game = new InstructionsScene();
+  expect(Object.keys(game)).toEqual(['create', 'update']);
 });

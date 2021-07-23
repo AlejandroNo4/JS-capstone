@@ -32,6 +32,7 @@
     "eslint-plugin-import": "^2.23.4",
     "jest": "^27.0.6",
     "jest-canvas-mock": "^2.3.1",
+    "jest-fetch-mock": "^3.0.3",
     "style-loader": "^3.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",

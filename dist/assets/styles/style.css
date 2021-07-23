@@ -1,0 +1,52 @@
+canvas {
+  display: block;
+  margin: auto;
+}
+
+body {
+  position: relative;
+}
+
+.inputBox {
+  width: 400px;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+.label {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+
+.formInputName {
+  position: absolute;
+  top: 400px;
+  left: calc(100vw / 2 - 200px);
+}
+
+.list {
+  position: absolute;
+  top: 200px;
+  left: calc(100vw / 2 - 200px);
+  padding: 0;
+  list-style: none;
+  width: 400px;
+  text-align: center;
+}
+
+.item-list {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  line-height: 0.3;
+  border-bottom: 1px solid white;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
